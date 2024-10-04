@@ -1,36 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ติดต่อเภสัชกร</title>
+    <title>Google Form with LIFF</title>
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 </head>
 <body>
-    <h1>กำลังโหลด...</h1>
+    <h1>กรุณารอสักครู่...</h1>
     <script>
-        // เริ่มต้น LIFF
-        async function initializeLiff() {
-            await liff.init({ liffId: "2006423065-PpO36v2z" });  // แทนที่ด้วย LIFF ID ที่ได้จาก LINE Developer Console
-            if (!liff.isLoggedIn()) {
-                liff.login(); // ถ้ายังไม่ได้ login ให้ทำการ login ก่อน
-            } else {
-                getUserProfile();
-            }
+        function initializeLiff() {
+            liff.init({ liffId: "2006423065-PpO36v2z" })
+                .then(() => {
+                    if (liff.isLoggedIn()) {
+                        liff.getProfile().then(profile => {
+                            const userId = profile.userId;
+                            const displayName = profile.displayName;
+                            // Redirect to Google Form with userId and displayName
+                            window.location.href = `https://forms.gle/YrFkse6znUGX36vF9?userId=${userId}&username=${displayName}`;
+                        });
+                    } else {
+                        liff.login();
+                    }
+                })
+                .catch(err => console.error(err));
         }
-
-        // ฟังก์ชันดึงข้อมูลโปรไฟล์ผู้ใช้
-        async function getUserProfile() {
-            const profile = await liff.getProfile();
-            const userId = profile.userId;
-            const displayName = profile.displayName;
-
-            // ส่งข้อมูลไปที่ Google Form พร้อมกับ userId และ displayName
-            const formUrl = `https://docs.google.com/forms/d/e/1FAIpQLSdECsgrC-88xCZM3o3olJo5_ciOrfzKulGHfuOP1GYFAan3mQ/viewform?usp=pp_url&entry.1234567890=${userId}&entry.0987654321=${displayName}`;
-            window.location.href = formUrl;
-        }
-
-        // เริ่มต้น LIFF เมื่อหน้าเพจโหลด
         initializeLiff();
     </script>
 </body>
