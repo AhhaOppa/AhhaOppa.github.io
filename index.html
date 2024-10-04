@@ -11,21 +11,21 @@
     <script>
         // เริ่มต้น LIFF
         async function initializeLiff() {
-            await liff.init({ liffId: "2006423065-PpO36v2z" });
+            await liff.init({ liffId: "2006423065-PpO36v2z" });  // แทนที่ด้วย LIFF ID ที่ได้จาก LINE Developer Console
             if (!liff.isLoggedIn()) {
-                liff.login();
+                liff.login(); // ถ้ายังไม่ได้ login ให้ทำการ login ก่อน
             } else {
                 getUserProfile();
             }
         }
 
-        // ฟังก์ชันดึงข้อมูล UserID และ Username
+        // ฟังก์ชันดึงข้อมูลโปรไฟล์ผู้ใช้
         async function getUserProfile() {
             const profile = await liff.getProfile();
             const userId = profile.userId;
             const displayName = profile.displayName;
 
-            // เปลี่ยนเส้นทางไปที่ Google Form พร้อมข้อมูล userId และ displayName
+            // ส่งข้อมูลไปที่ Google Form พร้อมกับ userId และ displayName
             const formUrl = `https://docs.google.com/forms/d/e/1FAIpQLSdECsgrC-88xCZM3o3olJo5_ciOrfzKulGHfuOP1GYFAan3mQ/viewform?usp=pp_url&entry.1234567890=${userId}&entry.0987654321=${displayName}`;
             window.location.href = formUrl;
         }
