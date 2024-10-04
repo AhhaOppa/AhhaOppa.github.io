@@ -8,14 +8,14 @@
     <h1>กรุณารอสักครู่...</h1>
     <script>
         function initializeLiff() {
-            liff.init({ liffId: "2006423065-PpO36v2z" })
+            liff.init({ liffId: "2006423065-PpO36v2z" }) // Replace with your LIFF ID
                 .then(() => {
                     if (liff.isLoggedIn()) {
                         liff.getProfile().then(profile => {
                             const userId = profile.userId;
                             const displayName = profile.displayName;
-                            // Redirect to Google Form with userId and displayName
-                            window.location.href = `https://forms.gle/YrFkse6znUGX36vF9?userId=${userId}&username=${displayName}`;
+                            // Redirect to Google Form with userId and displayName as URL parameters
+                            window.location.href = `https://docs.google.com/forms/d/e/1FAIpQLSdECsgrC-88xCZM3o3olJo5_ciOrfzKulGHfuOP1GYFAan3mQ/viewform?usp=pp_url&userID=${userId}&displayName=${displayName}`;
                         });
                     } else {
                         liff.login();
