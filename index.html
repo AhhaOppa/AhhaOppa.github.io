@@ -14,8 +14,13 @@
                         liff.getProfile().then(profile => {
                             const userId = profile.userId;
                             const displayName = profile.displayName;
-                            // Redirect to Google Form with hidden userId and displayName fields
-                            window.location.href = `https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?usp=pp_url&entry.USERID_FIELD=${userId}&entry.DISPLAYNAME_FIELD=${displayName}`;
+
+                            // ส่ง userId และ displayName ไปยัง Google Form
+                            const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdECsgrC-88xCZM3o3olJo5_ciOrfzKulGHfuOP1GYFAan3mQ/viewform";
+                            const formUrlWithParams = `${googleFormUrl}?usp=pp_url&261402940=${userId}&1078509971=${displayName}`;
+
+                            // เปลี่ยนเส้นทางไปที่ Google Form พร้อมกับ URL parameters
+                            window.location.href = formUrlWithParams;
                         });
                     } else {
                         liff.login();
