@@ -14,8 +14,8 @@
                         liff.getProfile().then(profile => {
                             const userId = profile.userId;
                             const displayName = profile.displayName;
-                            // Redirect to Google Apps Script with userId and displayName
-                            window.location.href = `https://script.google.com/macros/s/AKfycbyCBSfUIFeLegj0BUWJURFGHWMy4wfnMNLFul_8Q8GPdhErdi0djaIt1uFN4oOySw40RA/exec?userId=${userId}&username=${displayName}`;
+                            // Redirect to Google Form with hidden userId and displayName fields
+                            window.location.href = `https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?usp=pp_url&entry.USERID_FIELD=${userId}&entry.DISPLAYNAME_FIELD=${displayName}`;
                         });
                     } else {
                         liff.login();
