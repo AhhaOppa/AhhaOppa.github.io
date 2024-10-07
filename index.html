@@ -19,12 +19,8 @@
                             const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdECsgrC-88xCZM3o3olJo5_ciOrfzKulGHfuOP1GYFAan3mQ/viewform";
                             const formUrlWithParams = `${googleFormUrl}?usp=pp_url&entry.1309222655=${userId}&entry.1498928995=${displayName}`;
 
-                            // ตรวจสอบว่าได้ส่งฟอร์มไปแล้วหรือยัง
-                            if (!sessionStorage.getItem("formSubmitted")) {
-                                // เปลี่ยนเส้นทางไปที่ Google Form พร้อม URL parameters
-                                window.location.href = formUrlWithParams;
-                                sessionStorage.setItem("formSubmitted", "true");
-                            }
+                            // เปลี่ยนเส้นทางไปที่ Google Form พร้อม URL parameters
+                            window.location.href = formUrlWithParams;
                         });
                     } else {
                         liff.login();
