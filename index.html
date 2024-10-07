@@ -7,10 +7,12 @@
 <body>
     <h1>กรุณารอสักครู่...</h1>
     <script>
+        let hasRedirected = false;
+
         function initializeLiff() {
             liff.init({ liffId: "2006423065-PpO36v2z" }) // Replace with your LIFF ID
                 .then(() => {
-                    if (liff.isLoggedIn()) {
+                    if (liff.isLoggedIn() && !hasRedirected) {
                         liff.getProfile().then(profile => {
                             const userId = profile.userId;
                             const displayName = profile.displayName;
@@ -21,8 +23,9 @@
 
                             // เปลี่ยนเส้นทางไปที่ Google Form พร้อม URL parameters
                             window.location.href = formUrlWithParams;
+                            hasRedirected = true; // ป้องกันการเรียกซ้ำ
                         });
-                    } else {
+                    } else if (!liff.isLoggedIn()) {
                         liff.login();
                     }
                 })
