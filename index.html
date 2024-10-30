@@ -12,8 +12,8 @@
                 .then(() => {
                     if (liff.isLoggedIn()) {
                         liff.getProfile().then(profile => {
-                            const userId = profile.userId;
-                            const displayName = profile.displayName;
+                            const userId = encodeURIComponent(profile.userId);
+                            const displayName = encodeURIComponent(profile.displayName);
 
                             // สร้าง URL ของ Google Form พร้อมส่งค่า UserID และ DisplayName
                             const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdECsgrC-88xCZM3o3olJo5_ciOrfzKulGHfuOP1GYFAan3mQ/viewform";
@@ -21,12 +21,16 @@
 
                             // เปลี่ยนเส้นทางไปที่ Google Form พร้อม URL parameters
                             window.location.href = formUrlWithParams;
+                        }).catch(err => {
+                            console.error("Error getting profile:", err);
+                            liff.logout(); // ล็อคเอาท์และให้ผู้ใช้ล็อกอินใหม่
+                            liff.login(); 
                         });
                     } else {
                         liff.login();
                     }
                 })
-                .catch(err => console.error(err));
+                .catch(err => console.error("Error initializing LIFF:", err));
         }
         initializeLiff();
     </script>
